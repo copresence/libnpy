@@ -62,7 +62,7 @@ const char big_endian_char = '>';
 const char no_endian_char = '|';
 
 constexpr std::array<char, 3> endian_chars = {little_endian_char, big_endian_char, no_endian_char};
-constexpr std::array<char, 4> numtype_chars = {'f', 'i', 'u', 'c'};
+constexpr std::array<char, 5> numtype_chars = {'f', 'i', 'u', 'c', 'b'};
 
 constexpr char host_endian_char = (big_endian ? big_endian_char : little_endian_char);
 
@@ -120,6 +120,7 @@ inline version_t read_magic(std::istream &istream) {
 }
 
 const std::unordered_map<std::type_index, dtype_t> dtype_map = {
+    {std::type_index(typeid(char)), {no_endian_char, 'b', sizeof(char)}},
     {std::type_index(typeid(float)), {host_endian_char, 'f', sizeof(float)}},
     {std::type_index(typeid(double)), {host_endian_char, 'f', sizeof(double)}},
     {std::type_index(typeid(long double)), {host_endian_char, 'f', sizeof(long double)}},
